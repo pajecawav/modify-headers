@@ -15,6 +15,10 @@
 		"isolatedModules": true,
 		"noEmit": true,
 
+		/* JSX */
+		"jsx": "preserve",
+		"jsxImportSource": "solid-js",
+
 		/* Linting */
 		"strict": true,
 		"noUnusedLocals": true,
@@ -23,5 +27,5 @@
 
 		"types": ["chrome-types"]
 	},
-	"include": ["src", "src/options/.ts"]
+	"include": ["src"]
 }

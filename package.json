@@ -16,9 +16,16 @@
 		"format": "pt format --write",
 		"prepare": "pt prepare"
 	},
+	"dependencies": {
+		"nanoid": "^6.0.1",
+		"solid-js": "^1.9.14",
+		"werpc": "^0.0.5"
+	},
 	"devDependencies": {
 		"@pajecawav/tools": "^0.0.7",
 		"@rsbuild/core": "^2.1.6",
+		"@rsbuild/plugin-babel": "^2.0.1",
+		"@rsbuild/plugin-solid": "^1.2.2",
 		"@tailwindcss/postcss": "^4.3.3",
 		"@types/node": "^24.13.3",
 		"chrome-types": "^0.1.435",

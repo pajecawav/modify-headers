@@ -4,9 +4,12 @@
 	"description": "modify headers",
 	"version": "0.0.0",
 	"manifest_version": 3,
+	"permissions": ["declarativeNetRequest", "storage"],
+	"host_permissions": ["<all_urls>"],
 	"background": {
 		"service_worker": "background.js",
 		"type": "module"
 	},
+	"action": {},
 	"options_page": "options.html"
 }

@@ -1,1 +1,15 @@
 @import "tailwindcss";
+
+:root {
+	color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		color-scheme: dark;
+	}
+}
+
+html {
+	@apply bg-neutral-100 dark:bg-neutral-800;
+}
