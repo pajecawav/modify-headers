@@ -1,36 +1,76 @@
-export type HeaderType = "request" | "response";
+import { z } from "zod";
 
-export type HeaderOperation = "append" | "set" | "remove";
+const resourceTypeSchema = z.enum([
+	"main_frame",
+	"sub_frame",
+	"stylesheet",
+	"script",
+	"image",
+	"font",
+	"object",
+	"xmlhttprequest",
+	"ping",
+	"csp_report",
+	"media",
+	"websocket",
+	"webtransport",
+	"webbundle",
+	"other",
+]);
 
-export type UrlMatcherKind = "urlFilter" | "regexFilter";
+const requestMethodSchema = z.enum([
+	"connect",
+	"delete",
+	"get",
+	"head",
+	"options",
+	"patch",
+	"post",
+	"put",
+	"other",
+]);
 
-export interface RuleCondition {
-	urlMatcherKind?: UrlMatcherKind;
-	urlFilter?: string;
-	regexFilter?: string;
-	isUrlFilterCaseSensitive?: boolean;
-	resourceTypes?: chrome.declarativeNetRequest.ResourceType[];
-	initiatorDomains?: string[];
-	requestMethods?: chrome.declarativeNetRequest.RequestMethod[];
-	domainType?: chrome.declarativeNetRequest.DomainType;
-}
+const domainTypeSchema = z.enum(["firstParty", "thirdParty"]);
 
-export interface HeaderRule {
-	id: string;
-	header: string;
-	operation: HeaderOperation;
-	value?: string;
-	headerType: HeaderType;
-	condition: RuleCondition;
-}
+export const headerTypeSchema = z.enum(["request", "response"]);
+export const headerOperationSchema = z.enum(["append", "set", "remove"]);
+export const urlMatcherKindSchema = z.enum(["urlFilter", "regexFilter"]);
 
-export interface HeaderGroup {
-	id: string;
-	name: string;
-	enabled: boolean;
-	rules: HeaderRule[];
-}
+export const ruleConditionSchema = z.object({
+	urlMatcherKind: urlMatcherKindSchema.optional(),
+	urlFilter: z.string().optional(),
+	regexFilter: z.string().optional(),
+	isUrlFilterCaseSensitive: z.boolean().optional(),
+	resourceTypes: z.array(resourceTypeSchema).optional(),
+	initiatorDomains: z.array(z.string()).optional(),
+	requestMethods: z.array(requestMethodSchema).optional(),
+	domainType: domainTypeSchema.optional(),
+});
 
-export interface StoreState {
-	groups: HeaderGroup[];
-}
+export const headerRuleSchema = z.object({
+	id: z.string(),
+	header: z.string(),
+	operation: headerOperationSchema,
+	value: z.string().optional(),
+	headerType: headerTypeSchema,
+	condition: ruleConditionSchema,
+});
+
+export const headerGroupSchema = z.object({
+	id: z.string(),
+	name: z.string(),
+	enabled: z.boolean(),
+	rules: z.array(headerRuleSchema),
+});
+
+export const storeStateSchema = z.object({
+	groups: z.array(headerGroupSchema),
+});
+
+export type HeaderType = z.infer<typeof headerTypeSchema>;
+export type HeaderOperation = z.infer<typeof headerOperationSchema>;
+export type UrlMatcherKind = z.infer<typeof urlMatcherKindSchema>;
+export type RuleCondition = z.infer<typeof ruleConditionSchema>;
+export type HeaderRule = z.infer<typeof headerRuleSchema>;
+export type HeaderGroup = z.infer<typeof headerGroupSchema>;
+export type StoreState = z.infer<typeof storeStateSchema>;

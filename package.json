@@ -19,7 +19,8 @@
 	"dependencies": {
 		"nanoid": "^6.0.1",
 		"solid-js": "^1.9.14",
-		"werpc": "^0.0.5"
+		"werpc": "^0.0.5",
+		"zod": "^4.4.3"
 	},
 	"devDependencies": {
 		"@pajecawav/tools": "^0.0.7",

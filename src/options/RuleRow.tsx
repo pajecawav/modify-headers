@@ -45,7 +45,6 @@ export const RuleRow = (props: Props): JSX.Element => {
 				<label class="flex flex-col gap-1">
 					<span class={labelClass}>Header</span>
 					<Input
-						size="sm"
 						placeholder="X-Custom-Header"
 						value={props.rule.header}
 						onInput={e => update({ header: e.currentTarget.value })}
@@ -72,7 +71,6 @@ export const RuleRow = (props: Props): JSX.Element => {
 					<label class="flex flex-col gap-1">
 						<span class={labelClass}>Value</span>
 						<Input
-							size="sm"
 							placeholder="header value"
 							value={props.rule.value ?? ""}
 							onInput={e => update({ value: e.currentTarget.value })}
@@ -84,7 +82,9 @@ export const RuleRow = (props: Props): JSX.Element => {
 					appearance="negative"
 					size="sm"
 					onClick={() => {
-						if (confirm("Delete this rule?")) props.onDelete();
+						if (confirm("Delete this rule?")) {
+							props.onDelete();
+						}
 					}}
 				>
 					Delete
@@ -107,7 +107,7 @@ export const RuleRow = (props: Props): JSX.Element => {
 			</div>
 
 			<details class="mt-2">
-				<summary class="cursor-pointer font-medium text-neutral-500 hover:text-neutral-700 dark:text-neutral-400">
+				<summary class="cursor-pointer font-medium text-neutral-500 dark:text-neutral-400">
 					Condition
 				</summary>
 				<div class="mt-2 space-y-3">
@@ -146,7 +146,6 @@ export const RuleRow = (props: Props): JSX.Element => {
 						<label class="flex flex-col gap-1">
 							<span class={labelClass}>Regex filter (RE2)</span>
 							<Input
-								size="sm"
 								placeholder="^https?://example\\.com/.*"
 								value={props.rule.condition.regexFilter ?? ""}
 								onInput={e =>
@@ -158,7 +157,6 @@ export const RuleRow = (props: Props): JSX.Element => {
 						<label class="flex flex-col gap-1">
 							<span class={labelClass}>URL filter</span>
 							<Input
-								size="sm"
 								placeholder="||example.com^"
 								value={props.rule.condition.urlFilter ?? ""}
 								onInput={e => updateCondition({ urlFilter: e.currentTarget.value })}
@@ -222,7 +220,6 @@ export const RuleRow = (props: Props): JSX.Element => {
 						<label class="flex flex-col gap-1">
 							<span class={labelClass}>Initiator domains (comma-separated)</span>
 							<Input
-								size="sm"
 								class="min-w-[16rem]"
 								placeholder="example.com, foo.com"
 								value={props.rule.condition.initiatorDomains?.join(", ") ?? ""}

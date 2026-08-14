@@ -42,7 +42,7 @@ export const GroupCard = (props: Props): JSX.Element => {
 					title={props.group.enabled ? "Enabled" : "Disabled"}
 				/>
 				<input
-					class="flex-1 rounded border border-transparent bg-transparent px-2 py-1 text-base font-semibold focus:border-blue-500 focus:outline-none"
+					class="flex-1 rounded border-2 border-transparent bg-transparent px-2 py-1 text-base font-semibold focus:border-neutral-800 focus:outline-none dark:focus:border-neutral-200"
 					value={props.group.name}
 					placeholder="Group name"
 					onInput={e => update({ name: e.currentTarget.value })}

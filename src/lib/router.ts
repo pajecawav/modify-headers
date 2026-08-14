@@ -1,8 +1,9 @@
 import { nanoid } from "nanoid";
 import { initWERPC } from "werpc";
+import { z } from "zod";
 import { applyDnr } from "./dnr";
 import { store } from "./store";
-import type { HeaderGroup, StoreState } from "./types";
+import { headerGroupSchema, type HeaderGroup, type StoreState } from "./types";
 
 const t = initWERPC();
 
@@ -27,45 +28,21 @@ export const backgroundRouter = t.router({
 	list: t.procedure.query(() => store.getState()),
 
 	upsertGroup: t.procedure
-		.input((value): HeaderGroup => {
-			if (
-				typeof value !== "object" ||
-				value === null ||
-				typeof (value as HeaderGroup).id !== "string" ||
-				typeof (value as HeaderGroup).name !== "string" ||
-				typeof (value as HeaderGroup).enabled !== "boolean" ||
-				!Array.isArray((value as HeaderGroup).rules)
-			) {
-				throw new Error("Invalid group");
-			}
-			return value as HeaderGroup;
-		})
+		.input(headerGroupSchema)
 		.mutation(({ input }) => persist(replaceGroup(store.getState(), input))),
 
 	deleteGroup: t.procedure
-		.input((value): string => {
-			if (typeof value !== "string") {
-				throw new Error("Invalid group id");
-			}
-			return value;
-		})
+		.input(z.string())
 		.mutation(({ input }) =>
 			persist({ groups: store.getState().groups.filter(g => g.id !== input) }),
 		),
 
-	toggleGroup: t.procedure
-		.input((value): string => {
-			if (typeof value !== "string") {
-				throw new Error("Invalid group id");
-			}
-			return value;
-		})
-		.mutation(({ input }) => {
-			const state = store.getState();
-			return persist({
-				groups: state.groups.map(g => (g.id === input ? { ...g, enabled: !g.enabled } : g)),
-			});
-		}),
+	toggleGroup: t.procedure.input(z.string()).mutation(({ input }) => {
+		const state = store.getState();
+		return persist({
+			groups: state.groups.map(g => (g.id === input ? { ...g, enabled: !g.enabled } : g)),
+		});
+	}),
 
 	changed: t.procedure.subscription(async function* ({ signal }) {
 		yield store.getState();

@@ -9,6 +9,9 @@ export default defineConfig({
 		}),
 		pluginSolid(),
 	],
+	html: {
+		title: "Modify Headers",
+	},
 	source: {
 		entry: {
 			background: {
