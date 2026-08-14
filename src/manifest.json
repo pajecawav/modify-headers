@@ -1,0 +1,12 @@
+{
+	"$schema": "https://json.schemastore.org/chrome-manifest",
+	"name": "modify-headers",
+	"description": "modify headers",
+	"version": "0.0.0",
+	"manifest_version": 3,
+	"background": {
+		"service_worker": "background.js",
+		"type": "module"
+	},
+	"options_page": "options.html"
+}

@@ -1,0 +1,34 @@
+{
+	"name": "modify-headers",
+	"private": true,
+	"version": "0.0.0",
+	"type": "module",
+	"scripts": {
+		"dev": "cross-env FORCE_COLOR=1 run-p -l watch start:chromium",
+		"build": "rsbuild build",
+		"watch": "rsbuild build --watch",
+		"start:chromium": "web-ext run -s dist -t chromium --start-url=example.com",
+		"start:firefox": "web-ext run -s dist -t firefox-desktop --start-url=example.com",
+		"lint": "cross-env FORCE_COLOR=1 run-p -l lint:*",
+		"lint:oxlint": "oxlint .",
+		"lint:tsc": "tsc -b --noEmit",
+		"lint:format": "pt format",
+		"format": "pt format --write",
+		"prepare": "pt prepare"
+	},
+	"devDependencies": {
+		"@pajecawav/tools": "^0.0.7",
+		"@rsbuild/core": "^2.1.6",
+		"@types/node": "^24.13.3",
+		"chrome-types": "^0.1.435",
+		"cross-env": "^10.1.0",
+		"husky": "^9.1.7",
+		"npm-run-all2": "^9.0.3",
+		"oxfmt": "^0.63.0",
+		"oxlint": "^1.78.0",
+		"oxlint-tsgolint": "^7.0.2001",
+		"typescript": "~7.0.2",
+		"web-ext": "^10.5.0"
+	},
+	"packageManager": "pnpm@11.20.0"
+}
