@@ -1,7 +1,9 @@
 import type { JSX } from "solid-js";
 import type { HeaderOperation, HeaderRule, HeaderType, UrlMatcherKind } from "../lib/types";
 import { Button } from "../shared/components/Button";
+import { Checkbox } from "../shared/components/Checkbox";
 import { Input } from "../shared/components/Input";
+import { Radio } from "../shared/components/Radio";
 import { Select } from "../shared/components/Select";
 import { DOMAIN_TYPES, REQUEST_METHODS, RESOURCE_TYPES } from "./constants";
 
@@ -94,15 +96,13 @@ export const RuleRow = (props: Props): JSX.Element => {
 			<div class="mt-3 flex flex-wrap items-center gap-4">
 				<span class={labelClass}>Header type:</span>
 				{HEADER_TYPES.map(ht => (
-					<label class="flex items-center gap-1 text-base">
-						<input
-							type="radio"
-							name={`headerType-${props.rule.id}`}
-							checked={props.rule.headerType === ht}
-							onChange={() => update({ headerType: ht })}
-						/>
+					<Radio
+						name={`headerType-${props.rule.id}`}
+						checked={props.rule.headerType === ht}
+						onChange={() => update({ headerType: ht })}
+					>
 						<span class="capitalize">{ht}</span>
-					</label>
+					</Radio>
 				))}
 			</div>
 
@@ -114,32 +114,27 @@ export const RuleRow = (props: Props): JSX.Element => {
 					<div class="flex flex-wrap items-center gap-4">
 						<span class={labelClass}>URL matcher:</span>
 						{MATCHER_KINDS.map(kind => (
-							<label class="flex items-center gap-1 text-base">
-								<input
-									type="radio"
-									name={`matcher-${props.rule.id}`}
-									checked={
-										props.rule.condition.urlMatcherKind === kind ||
-										(!props.rule.condition.urlMatcherKind &&
-											kind === "urlFilter")
-									}
-									onChange={() => updateCondition({ urlMatcherKind: kind })}
-								/>
-								<span>{kind}</span>
-							</label>
-						))}
-						<label class="flex items-center gap-1">
-							<input
-								type="checkbox"
-								checked={props.rule.condition.isUrlFilterCaseSensitive ?? false}
-								onChange={e =>
-									updateCondition({
-										isUrlFilterCaseSensitive: e.currentTarget.checked,
-									})
+							<Radio
+								name={`matcher-${props.rule.id}`}
+								checked={
+									props.rule.condition.urlMatcherKind === kind ||
+									(!props.rule.condition.urlMatcherKind && kind === "urlFilter")
 								}
-							/>
-							<span>case sensitive</span>
-						</label>
+								onChange={() => updateCondition({ urlMatcherKind: kind })}
+							>
+								<span>{kind}</span>
+							</Radio>
+						))}
+						<Checkbox
+							checked={props.rule.condition.isUrlFilterCaseSensitive ?? false}
+							onChange={e =>
+								updateCondition({
+									isUrlFilterCaseSensitive: e.currentTarget.checked,
+								})
+							}
+						>
+							case sensitive
+						</Checkbox>
 					</div>
 
 					{props.rule.condition.urlMatcherKind === "regexFilter" ? (
@@ -168,24 +163,21 @@ export const RuleRow = (props: Props): JSX.Element => {
 						<span class={labelClass}>Resource types</span>
 						<div class="mt-1 flex flex-wrap gap-2">
 							{RESOURCE_TYPES.map(rt => (
-								<label class="flex items-center gap-1">
-									<input
-										type="checkbox"
-										checked={
-											props.rule.condition.resourceTypes?.includes(rt) ??
-											false
-										}
-										onChange={() =>
-											updateCondition({
-												resourceTypes: toggleArray(
-													props.rule.condition.resourceTypes,
-													rt,
-												),
-											})
-										}
-									/>
+								<Checkbox
+									checked={
+										props.rule.condition.resourceTypes?.includes(rt) ?? false
+									}
+									onChange={() =>
+										updateCondition({
+											resourceTypes: toggleArray(
+												props.rule.condition.resourceTypes,
+												rt,
+											),
+										})
+									}
+								>
 									<span>{rt}</span>
-								</label>
+								</Checkbox>
 							))}
 						</div>
 					</div>
@@ -194,24 +186,21 @@ export const RuleRow = (props: Props): JSX.Element => {
 						<span class={labelClass}>Request methods</span>
 						<div class="mt-1 flex flex-wrap gap-2">
 							{REQUEST_METHODS.map(rm => (
-								<label class="flex items-center gap-1">
-									<input
-										type="checkbox"
-										checked={
-											props.rule.condition.requestMethods?.includes(rm) ??
-											false
-										}
-										onChange={() =>
-											updateCondition({
-												requestMethods: toggleArray(
-													props.rule.condition.requestMethods,
-													rm,
-												),
-											})
-										}
-									/>
+								<Checkbox
+									checked={
+										props.rule.condition.requestMethods?.includes(rm) ?? false
+									}
+									onChange={() =>
+										updateCondition({
+											requestMethods: toggleArray(
+												props.rule.condition.requestMethods,
+												rm,
+											),
+										})
+									}
+								>
 									<span class="uppercase">{rm}</span>
-								</label>
+								</Checkbox>
 							))}
 						</div>
 					</div>

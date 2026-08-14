@@ -3,6 +3,7 @@ import { createSignal, Index } from "solid-js";
 import { createRule } from "../lib/factory";
 import type { HeaderGroup } from "../lib/types";
 import { Button } from "../shared/components/Button";
+import { Checkbox } from "../shared/components/Checkbox";
 import { RuleRow } from "./RuleRow";
 
 interface Props {
@@ -35,8 +36,7 @@ export const GroupCard = (props: Props): JSX.Element => {
 	return (
 		<div class="rounded-xl border border-neutral-200 bg-white shadow-sm dark:border-neutral-700 dark:bg-neutral-800">
 			<div class="flex items-center gap-3 p-3">
-				<input
-					type="checkbox"
+				<Checkbox
 					checked={props.group.enabled}
 					onChange={e => update({ enabled: e.currentTarget.checked })}
 					title={props.group.enabled ? "Enabled" : "Disabled"}
