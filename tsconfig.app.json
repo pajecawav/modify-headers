@@ -23,5 +23,5 @@
 
 		"types": ["chrome-types"]
 	},
-	"include": ["src"]
+	"include": ["src", "src/options/.ts"]
 }

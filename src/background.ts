@@ -1,4 +1,4 @@
-import { createLogger } from "./logger";
+import { createLogger } from "./lib/logger";
 
 const logger = createLogger("background");
 

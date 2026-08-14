@@ -4,10 +4,10 @@ export default defineConfig({
 	source: {
 		entry: {
 			background: {
-				import: "./src/background.ts",
+				import: "./src/background",
 				html: false,
 			},
-			options: "./src/options.ts",
+			options: "./src/options",
 		},
 	},
 	output: {

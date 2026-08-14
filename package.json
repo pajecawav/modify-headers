@@ -19,6 +19,7 @@
 	"devDependencies": {
 		"@pajecawav/tools": "^0.0.7",
 		"@rsbuild/core": "^2.1.6",
+		"@tailwindcss/postcss": "^4.3.3",
 		"@types/node": "^24.13.3",
 		"chrome-types": "^0.1.435",
 		"cross-env": "^10.1.0",
@@ -27,6 +28,7 @@
 		"oxfmt": "^0.63.0",
 		"oxlint": "^1.78.0",
 		"oxlint-tsgolint": "^7.0.2001",
+		"tailwindcss": "^4.3.3",
 		"typescript": "~7.0.2",
 		"web-ext": "^10.5.0"
 	},

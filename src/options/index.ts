@@ -1,4 +1,5 @@
-import { createLogger } from "./logger";
+import "./index.css";
+import { createLogger } from "../lib/logger";
 
 const logger = createLogger("options");
 
