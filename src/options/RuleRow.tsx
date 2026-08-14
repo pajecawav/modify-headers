@@ -1,4 +1,5 @@
 import type { JSX } from "solid-js";
+import { cn } from "../lib/cn";
 import type { HeaderOperation, HeaderRule, HeaderType, UrlMatcherKind } from "../lib/types";
 import { Button } from "../shared/components/Button";
 import { Checkbox } from "../shared/components/Checkbox";
@@ -42,8 +43,22 @@ export const RuleRow = (props: Props): JSX.Element => {
 	};
 
 	return (
-		<div class="rounded-lg border border-neutral-200 bg-neutral-50 p-3 dark:border-neutral-700 dark:bg-neutral-900">
-			<div class="grid grid-cols-[1fr_1fr_2fr_auto] items-end gap-2">
+		<div
+			class={cn(
+				"rounded-lg border border-neutral-200 bg-neutral-50 p-3 dark:border-neutral-700 dark:bg-neutral-900",
+				props.rule.enabled ? "" : "opacity-50",
+			)}
+		>
+			<div class="grid grid-cols-[auto_1fr_1fr_2fr_auto] items-stretch gap-2">
+				<div class="flex flex-col gap-1">
+					<span class={labelClass}>On</span>
+					<Checkbox
+						class="flex-1"
+						checked={props.rule.enabled}
+						onChange={e => update({ enabled: e.currentTarget.checked })}
+						title={props.rule.enabled ? "Enabled" : "Disabled"}
+					/>
+				</div>
 				<label class="flex flex-col gap-1">
 					<span class={labelClass}>Header</span>
 					<Input
@@ -79,18 +94,20 @@ export const RuleRow = (props: Props): JSX.Element => {
 						/>
 					</label>
 				)}
-				<Button
-					variant="ghost"
-					appearance="negative"
-					size="sm"
-					onClick={() => {
-						if (confirm("Delete this rule?")) {
-							props.onDelete();
-						}
-					}}
-				>
-					Delete
-				</Button>
+				<div>
+					<Button
+						variant="ghost"
+						appearance="negative"
+						size="sm"
+						onClick={() => {
+							if (confirm("Delete this rule?")) {
+								props.onDelete();
+							}
+						}}
+					>
+						Delete
+					</Button>
+				</div>
 			</div>
 
 			<div class="mt-3 flex flex-wrap items-center gap-4">

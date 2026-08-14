@@ -64,6 +64,9 @@ export const stateToRules = (state: StoreState): chrome.declarativeNetRequest.Ru
 			continue;
 		}
 		for (const rule of group.rules) {
+			if (!rule.enabled) {
+				continue;
+			}
 			rules.push(ruleToDnr(rule, nextId++));
 		}
 	}

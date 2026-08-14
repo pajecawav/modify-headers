@@ -54,6 +54,7 @@ export const headerRuleSchema = z.object({
 	value: z.string().optional(),
 	headerType: headerTypeSchema,
 	condition: ruleConditionSchema,
+	enabled: z.boolean().default(true),
 });
 
 export const headerGroupSchema = z.object({

@@ -1,4 +1,4 @@
-import type { StoreState } from "./types";
+import { storeStateSchema, type StoreState } from "./types";
 
 const STORAGE_KEY = "modify-headers-state";
 
@@ -12,7 +12,8 @@ class Store {
 
 	public async load(): Promise<StoreState> {
 		const result = await chrome.storage.local.get(STORAGE_KEY);
-		this.cache = (result[STORAGE_KEY] as StoreState | undefined) ?? DEFAULT_STATE;
+		const raw = result[STORAGE_KEY] as unknown;
+		this.cache = raw ? storeStateSchema.parse(raw) : DEFAULT_STATE;
 		return this.cache;
 	}
 

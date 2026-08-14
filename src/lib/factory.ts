@@ -8,6 +8,7 @@ export const createRule = (): HeaderRule => ({
 	value: "",
 	headerType: "request",
 	condition: {},
+	enabled: true,
 });
 
 export const createGroup = (name = "New group"): HeaderGroup => ({
