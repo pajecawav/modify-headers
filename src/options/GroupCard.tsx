@@ -2,6 +2,7 @@ import type { JSX } from "solid-js";
 import { createSignal, Index } from "solid-js";
 import { createRule } from "../lib/factory";
 import type { HeaderGroup } from "../lib/types";
+import { Button } from "../shared/components/Button";
 import { RuleRow } from "./RuleRow";
 
 interface Props {
@@ -49,22 +50,19 @@ export const GroupCard = (props: Props): JSX.Element => {
 				<span class="text-neutral-400">
 					{props.group.rules.length} rule{props.group.rules.length === 1 ? "" : "s"}
 				</span>
-				<button
-					type="button"
-					class="rounded px-2 py-1 text-base text-neutral-500 hover:bg-neutral-100 dark:hover:bg-neutral-700"
-					onClick={() => setExpanded(e => !e)}
-				>
+				<Button variant="ghost" size="sm" onClick={() => setExpanded(e => !e)}>
 					{expanded() ? "Collapse" : "Expand"}
-				</button>
-				<button
-					type="button"
-					class="cursor-pointer rounded px-2 py-1 text-base text-red-500 hover:bg-red-50 dark:hover:bg-red-950"
+				</Button>
+				<Button
+					variant="ghost"
+					appearance="negative"
+					size="sm"
 					onClick={() => {
 						if (confirm(`Delete group "${props.group.name}"?`)) props.onDelete();
 					}}
 				>
 					Delete
-				</button>
+				</Button>
 			</div>
 
 			{expanded() && (
@@ -78,13 +76,9 @@ export const GroupCard = (props: Props): JSX.Element => {
 							/>
 						)}
 					</Index>
-					<button
-						type="button"
-						class="cursor-pointer w-full rounded-lg border border-dashed border-neutral-300 py-2 text-base text-neutral-500 hover:border-blue-400 hover:text-blue-500 dark:border-neutral-600"
-						onClick={addRule}
-					>
+					<Button variant="dashed" size="md" class="w-full" onClick={addRule}>
 						+ Add rule
-					</button>
+					</Button>
 				</div>
 			)}
 		</div>

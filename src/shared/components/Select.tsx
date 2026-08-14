@@ -1,11 +1,23 @@
-import { ComponentProps } from "solid-js";
+import { ComponentProps, splitProps } from "solid-js";
 import { cn } from "../../lib/cn";
-import { inputBaseClassName, inputPaddingClasses } from "./Input";
+import { inputBaseClassName, inputSizeClasses } from "./Input";
 
-type SelectProps = ComponentProps<"select">;
+type Size = keyof typeof inputSizeClasses;
 
-export const selectBaseClassName = cn(inputBaseClassName, inputPaddingClasses.md);
+type SelectProps = ComponentProps<"select"> & {
+	size?: Size;
+};
+
+export const selectBaseClassName = cn(inputBaseClassName, inputSizeClasses.md);
 
 export const Select = (props: SelectProps) => {
-	return <select {...props} class={cn(selectBaseClassName, props.class)} spellcheck={false} />;
+	const [local, rest] = splitProps(props, ["size", "class"]);
+
+	return (
+		<select
+			{...rest}
+			class={cn(inputBaseClassName, inputSizeClasses[local.size ?? "md"], local.class)}
+			spellcheck={false}
+		/>
+	);
 };

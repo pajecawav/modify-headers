@@ -3,6 +3,7 @@ import { createSignal, Index, onMount, Show } from "solid-js";
 import { createClient } from "werpc";
 import { createGroup } from "../lib/factory";
 import type { HeaderGroup } from "../lib/types";
+import { Button } from "../shared/components/Button";
 import { GroupCard } from "./GroupCard";
 
 const client = createClient({ clientName: "options" });
@@ -57,13 +58,9 @@ export const App = (): JSX.Element => {
 		<div class="mx-auto max-w-4xl p-6">
 			<header class="mb-6 flex items-center justify-between">
 				<h1 class="text-2xl font-bold">Modify Headers</h1>
-				<button
-					type="button"
-					class="cursor-pointer rounded-md bg-neutral-900 px-3 py-1.5 text-sm font-medium text-white hover:bg-neutral-700 dark:bg-white dark:text-neutral-900 dark:hover:bg-neutral-300"
-					onClick={handleAddGroup}
-				>
+				<Button variant="primary" size="sm" onClick={handleAddGroup}>
 					Add group
-				</button>
+				</Button>
 			</header>
 
 			<Show when={!loading()} fallback={<p class="text-neutral-500">Loading…</p>}>

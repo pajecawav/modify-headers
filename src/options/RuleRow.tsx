@@ -1,5 +1,6 @@
 import type { JSX } from "solid-js";
 import type { HeaderOperation, HeaderRule, HeaderType, UrlMatcherKind } from "../lib/types";
+import { Button } from "../shared/components/Button";
 import { Input } from "../shared/components/Input";
 import { Select } from "../shared/components/Select";
 import { DOMAIN_TYPES, REQUEST_METHODS, RESOURCE_TYPES } from "./constants";
@@ -44,7 +45,7 @@ export const RuleRow = (props: Props): JSX.Element => {
 				<label class="flex flex-col gap-1">
 					<span class={labelClass}>Header</span>
 					<Input
-						padding="sm"
+						size="sm"
 						placeholder="X-Custom-Header"
 						value={props.rule.header}
 						onInput={e => update({ header: e.currentTarget.value })}
@@ -71,22 +72,23 @@ export const RuleRow = (props: Props): JSX.Element => {
 					<label class="flex flex-col gap-1">
 						<span class={labelClass}>Value</span>
 						<Input
-							padding="sm"
+							size="sm"
 							placeholder="header value"
 							value={props.rule.value ?? ""}
 							onInput={e => update({ value: e.currentTarget.value })}
 						/>
 					</label>
 				)}
-				<button
-					type="button"
-					class="cursor-pointer rounded px-2 py-1 text-base text-red-500 hover:bg-red-50 dark:hover:bg-red-950"
+				<Button
+					variant="ghost"
+					appearance="negative"
+					size="sm"
 					onClick={() => {
 						if (confirm("Delete this rule?")) props.onDelete();
 					}}
 				>
 					Delete
-				</button>
+				</Button>
 			</div>
 
 			<div class="mt-3 flex flex-wrap items-center gap-4">
@@ -144,7 +146,7 @@ export const RuleRow = (props: Props): JSX.Element => {
 						<label class="flex flex-col gap-1">
 							<span class={labelClass}>Regex filter (RE2)</span>
 							<Input
-								padding="sm"
+								size="sm"
 								placeholder="^https?://example\\.com/.*"
 								value={props.rule.condition.regexFilter ?? ""}
 								onInput={e =>
@@ -156,7 +158,7 @@ export const RuleRow = (props: Props): JSX.Element => {
 						<label class="flex flex-col gap-1">
 							<span class={labelClass}>URL filter</span>
 							<Input
-								padding="sm"
+								size="sm"
 								placeholder="||example.com^"
 								value={props.rule.condition.urlFilter ?? ""}
 								onInput={e => updateCondition({ urlFilter: e.currentTarget.value })}
@@ -220,7 +222,7 @@ export const RuleRow = (props: Props): JSX.Element => {
 						<label class="flex flex-col gap-1">
 							<span class={labelClass}>Initiator domains (comma-separated)</span>
 							<Input
-								padding="sm"
+								size="sm"
 								class="min-w-[16rem]"
 								placeholder="example.com, foo.com"
 								value={props.rule.condition.initiatorDomains?.join(", ") ?? ""}

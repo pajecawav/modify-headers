@@ -1,17 +1,7 @@
-import { ComponentProps } from "solid-js";
-import { cn } from "../../lib/cn";
+import { Button, type ButtonProps } from "./Button";
 
-type IconButtonProps = ComponentProps<"button">;
+type IconButtonProps = Omit<ButtonProps, "icon">;
 
 export const IconButton = (props: IconButtonProps) => {
-	return (
-		<button
-			{...props}
-			class={cn(
-				"cursor-pointer rounded-md p-1 transition-colors enabled:hover:bg-neutral-400/25",
-				"disabled:cursor-not-allowed",
-				props.class,
-			)}
-		/>
-	);
+	return <Button icon {...props} />;
 };
