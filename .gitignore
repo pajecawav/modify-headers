@@ -3,3 +3,6 @@ dist
 *.tsbuildinfo
 coverage
 .swc
+
+dist.crx
+dist.pem
