@@ -1,7 +1,11 @@
+import { createClient } from "werpc";
+
+const client = createClient({ clientName: "offscreen" });
+
 const mq = window.matchMedia("(prefers-color-scheme: dark)");
 
 const send = () => {
-	void chrome.runtime.sendMessage({ type: "theme-changed", dark: mq.matches });
+	void client.background.themeChanged.mutate({ dark: mq.matches });
 };
 
 send();

@@ -1,6 +1,7 @@
 import { nanoid } from "nanoid";
 import { initWERPC } from "werpc";
 import { z } from "zod";
+import { setIcon } from "../background/theme";
 import { applyDnr } from "./dnr";
 import { store } from "./store";
 import { headerGroupSchema, type HeaderGroup, type StoreState } from "./types";
@@ -47,6 +48,10 @@ export const backgroundRouter = t.router({
 	toggleAll: t.procedure.mutation(() => {
 		const state = store.getState();
 		return persist({ ...state, enabled: !state.enabled });
+	}),
+
+	themeChanged: t.procedure.input(z.object({ dark: z.boolean() })).mutation(({ input }) => {
+		setIcon(input.dark);
 	}),
 
 	changed: t.procedure.subscription(async function* ({ signal }) {

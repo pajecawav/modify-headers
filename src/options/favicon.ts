@@ -1,3 +1,7 @@
+import { createClient } from "werpc";
+
+const client = createClient({ clientName: "options" });
+
 const ICON_LIGHT = "assets/logo32.png";
 const ICON_DARK = "assets/logo-white32.png";
 
@@ -13,7 +17,12 @@ const setFavicon = (dark: boolean) => {
 	link.href = dark ? ICON_DARK : ICON_LIGHT;
 };
 
+const onChange = (dark: boolean) => {
+	setFavicon(dark);
+	void client.background.themeChanged.mutate({ dark });
+};
+
 export const initFavicon = () => {
-	setFavicon(mq.matches);
-	mq.addEventListener("change", e => setFavicon(e.matches));
+	onChange(mq.matches);
+	mq.addEventListener("change", e => onChange(e.matches));
 };

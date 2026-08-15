@@ -12,7 +12,7 @@ const ICONS_DARK = {
 	128: "assets/logo-white128.png",
 };
 
-const setIcon = (dark: boolean) => {
+export const setIcon = (dark: boolean) => {
 	void chrome.action.setIcon({ path: dark ? ICONS_DARK : ICONS_LIGHT });
 };
 
@@ -40,13 +40,6 @@ const setupOffscreenDocument = async () => {
 	await creating;
 	creating = null;
 };
-
-chrome.runtime.onMessage.addListener(message => {
-	if (message?.type === "theme-changed") {
-		setIcon(message.dark);
-	}
-	return false;
-});
 
 export const initTheme = () => {
 	void setupOffscreenDocument();
