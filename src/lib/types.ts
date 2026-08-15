@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-const resourceTypeSchema = z.enum([
+export const resourceTypeSchema = z.enum([
 	"main_frame",
 	"sub_frame",
 	"stylesheet",

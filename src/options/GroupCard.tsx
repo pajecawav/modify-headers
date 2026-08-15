@@ -1,5 +1,6 @@
 import type { JSX } from "solid-js";
 import { createSignal, Index } from "solid-js";
+import { cn } from "../lib/cn";
 import { createRule } from "../lib/factory";
 import type { HeaderGroup } from "../lib/types";
 import { Button } from "../shared/components/Button";
@@ -34,7 +35,12 @@ export const GroupCard = (props: Props): JSX.Element => {
 	};
 
 	return (
-		<div class="rounded-xl border border-neutral-200 bg-white shadow-sm dark:border-neutral-700 dark:bg-neutral-800">
+		<div
+			class={cn(
+				"rounded-xl border border-neutral-200 bg-white shadow-sm dark:border-neutral-700 dark:bg-neutral-800",
+				props.group.enabled ? "" : "opacity-50",
+			)}
+		>
 			<div class="flex items-center gap-3 p-3">
 				<Checkbox
 					checked={props.group.enabled}

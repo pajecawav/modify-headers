@@ -1,6 +1,7 @@
 import type { JSX } from "solid-js";
 import { createSignal, Index, onMount, Show } from "solid-js";
 import { createClient } from "werpc";
+import { cn } from "../lib/cn";
 import { createGroup } from "../lib/factory";
 import type { HeaderGroup } from "../lib/types";
 import { Button } from "../shared/components/Button";
@@ -87,7 +88,7 @@ export const App = (): JSX.Element => {
 						</p>
 					}
 				>
-					<div class="space-y-3">
+					<div class={cn("space-y-3", enabled() ? "" : "opacity-50")}>
 						<Index each={groups()}>
 							{group => (
 								<GroupCard

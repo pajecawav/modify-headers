@@ -1,5 +1,5 @@
 import { nanoid } from "nanoid";
-import type { HeaderGroup, HeaderRule } from "./types";
+import { resourceTypeSchema, type HeaderGroup, HeaderRule } from "./types";
 
 export const createRule = (): HeaderRule => ({
 	id: nanoid(),
@@ -7,7 +7,7 @@ export const createRule = (): HeaderRule => ({
 	operation: "set",
 	value: "",
 	headerType: "request",
-	condition: {},
+	condition: { resourceTypes: resourceTypeSchema.options },
 	enabled: true,
 });
 
