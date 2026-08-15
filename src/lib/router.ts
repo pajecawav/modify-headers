@@ -2,6 +2,7 @@ import { nanoid } from "nanoid";
 import { initWERPC } from "werpc";
 import { z } from "zod";
 import { setIcon } from "../background/theme";
+import { applyBadge } from "./badge";
 import { applyDnr } from "./dnr";
 import { store } from "./store";
 import { headerGroupSchema, type HeaderGroup, type StoreState } from "./types";
@@ -11,6 +12,7 @@ const t = initWERPC();
 const persist = async (state: StoreState): Promise<StoreState> => {
 	await store.save(state);
 	await applyDnr(state);
+	applyBadge(state);
 	return state;
 };
 

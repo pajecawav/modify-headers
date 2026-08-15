@@ -29,7 +29,9 @@ chrome.action.onClicked.addListener(() => {
 void (async () => {
 	const state = await store.load();
 	const { applyDnr } = await import("../lib/dnr");
+	const { applyBadge } = await import("../lib/badge");
 	await applyDnr(state);
+	applyBadge(state);
 	logger.log("hydrated", state.groups.length, "groups");
 	initTheme();
 })();
