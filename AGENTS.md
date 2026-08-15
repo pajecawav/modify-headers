@@ -104,7 +104,7 @@ src/
     index.ts           # MATCH_MEDIA observer → background.themeChanged
   shared/components/   # Input, Select, Button, Checkbox, Switch, Radio, RadioGroup, IconButton, HttpIcon
 rsbuild.config.ts      # entry: background (no html) + offscreen + options; copy manifest; no hash
-playwright.config.ts   # e2e: globalSetup builds dist/, channel:'chromium', workers:1
+playwright.config.ts   # e2e: globalSetup builds dist/, channel:'chromium', fullyParallel
 e2e/                   # Playwright tests (see E2E testing below)
 ```
 
@@ -125,7 +125,7 @@ Playwright loads the unpacked extension in bundled Chromium and tests the full s
 
 ### Setup
 
-- `playwright.config.ts` — `globalSetup` runs `pnpm build` to produce `dist/`, then tests execute against it. Uses `channel: 'chromium'` (Playwright's bundled Chromium, supports headless extension loading without xvfb). `workers: 1` (extension state is shared via persistent context).
+- `playwright.config.ts` — `globalSetup` runs `pnpm build` to produce `dist/`, then tests execute against it. Uses `channel: 'chromium'` (Playwright's bundled Chromium, supports headless extension loading without xvfb). `fullyParallel: true` + default workers (half of CPU cores) — each test is fully isolated (own temp user-data dir, own echo server on port 0, own Chromium instance), so all tests run in parallel.
 - Extension is loaded via `chromium.launchPersistentContext()` with `--disable-extensions-except` + `--load-extension` pointing at `dist/`. Each test gets a fresh temp user-data dir (clean storage).
 - Extension ID is dynamic — extracted at runtime from the service worker URL (`new URL(worker.url()).hostname`), never hardcoded.
 - `tsconfig.e2e.json` includes `chrome-types` so `worker.evaluate(() => chrome.* ...)` is typed.
