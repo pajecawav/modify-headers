@@ -1,8 +1,8 @@
 {
 	"$schema": "https://json.schemastore.org/chrome-manifest",
 	"name": "modify-headers",
-	"description": "modify headers",
-	"version": "0.0.0",
+	"description": "Modify HTTP headers",
+	"version": "0.0.1",
 	"manifest_version": 3,
 	"permissions": ["declarativeNetRequest", "storage", "offscreen"],
 	"host_permissions": ["<all_urls>"],
