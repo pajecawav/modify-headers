@@ -65,6 +65,7 @@ export const headerGroupSchema = z.object({
 });
 
 export const storeStateSchema = z.object({
+	enabled: z.boolean().default(true),
 	groups: z.array(headerGroupSchema),
 });
 

@@ -4,6 +4,7 @@ import { createClient } from "werpc";
 import { createGroup } from "../lib/factory";
 import type { HeaderGroup } from "../lib/types";
 import { Button } from "../shared/components/Button";
+import { Switch } from "../shared/components/Switch";
 import { GroupCard } from "./GroupCard";
 
 const client = createClient({ clientName: "options" });
@@ -13,11 +14,13 @@ const timers = new Map<string, ReturnType<typeof setTimeout>>();
 
 export const App = (): JSX.Element => {
 	const [groups, setGroups] = createSignal<HeaderGroup[]>([]);
+	const [enabled, setEnabled] = createSignal(true);
 	const [loading, setLoading] = createSignal(true);
 
 	onMount(async () => {
 		const state = await client.background.list.query();
 		setGroups(state.groups);
+		setEnabled(state.enabled);
 		setLoading(false);
 	});
 
@@ -54,13 +57,25 @@ export const App = (): JSX.Element => {
 		void client.background.deleteGroup.mutate(id);
 	};
 
+	const handleToggleAll = (next: boolean): void => {
+		setEnabled(next);
+		void client.background.toggleAll.mutate();
+	};
+
 	return (
 		<div class="mx-auto max-w-4xl p-6">
 			<header class="mb-6 flex items-center justify-between">
 				<h1 class="text-2xl font-bold">Modify Headers</h1>
-				<Button variant="primary" size="sm" onClick={handleAddGroup}>
-					Add group
-				</Button>
+				<div class="flex items-center gap-3">
+					<Switch
+						checked={enabled()}
+						onChange={handleToggleAll}
+						aria-label="Toggle all rules"
+					/>
+					<Button variant="primary" size="sm" onClick={handleAddGroup}>
+						Add group
+					</Button>
+				</div>
 			</header>
 
 			<Show when={!loading()} fallback={<p class="text-neutral-500">Loading…</p>}>

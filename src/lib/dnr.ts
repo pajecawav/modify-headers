@@ -56,6 +56,10 @@ const ruleToDnr = (rule: HeaderRule, ruleId: number): chrome.declarativeNetReque
 };
 
 export const stateToRules = (state: StoreState): chrome.declarativeNetRequest.Rule[] => {
+	if (!state.enabled) {
+		return [];
+	}
+
 	const rules: chrome.declarativeNetRequest.Rule[] = [];
 	let nextId = 1;
 
@@ -65,6 +69,9 @@ export const stateToRules = (state: StoreState): chrome.declarativeNetRequest.Ru
 		}
 		for (const rule of group.rules) {
 			if (!rule.enabled) {
+				continue;
+			}
+			if (!rule.header.trim()) {
 				continue;
 			}
 			rules.push(ruleToDnr(rule, nextId++));

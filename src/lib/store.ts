@@ -2,7 +2,7 @@ import { storeStateSchema, type StoreState } from "./types";
 
 const STORAGE_KEY = "modify-headers-state";
 
-const DEFAULT_STATE: StoreState = { groups: [] };
+const DEFAULT_STATE: StoreState = { enabled: true, groups: [] };
 
 type ChangeListener = (state: StoreState) => void;
 

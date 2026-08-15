@@ -21,7 +21,7 @@ const replaceGroup = (state: StoreState, group: HeaderGroup): StoreState => {
 	} else {
 		groups[idx] = group;
 	}
-	return { groups };
+	return { ...state, groups };
 };
 
 export const backgroundRouter = t.router({
@@ -31,17 +31,22 @@ export const backgroundRouter = t.router({
 		.input(headerGroupSchema)
 		.mutation(({ input }) => persist(replaceGroup(store.getState(), input))),
 
-	deleteGroup: t.procedure
-		.input(z.string())
-		.mutation(({ input }) =>
-			persist({ groups: store.getState().groups.filter(g => g.id !== input) }),
-		),
+	deleteGroup: t.procedure.input(z.string()).mutation(({ input }) => {
+		const state = store.getState();
+		return persist({ ...state, groups: state.groups.filter(g => g.id !== input) });
+	}),
 
 	toggleGroup: t.procedure.input(z.string()).mutation(({ input }) => {
 		const state = store.getState();
 		return persist({
+			...state,
 			groups: state.groups.map(g => (g.id === input ? { ...g, enabled: !g.enabled } : g)),
 		});
+	}),
+
+	toggleAll: t.procedure.mutation(() => {
+		const state = store.getState();
+		return persist({ ...state, enabled: !state.enabled });
 	}),
 
 	changed: t.procedure.subscription(async function* ({ signal }) {
