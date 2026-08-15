@@ -24,6 +24,9 @@ importers:
       '@pajecawav/tools':
         specifier: ^0.0.7
         version: 0.0.7(chokidar@5.0.0)(jiti@2.7.0)(oxfmt@0.63.0)(oxlint@1.78.0(oxlint-tsgolint@7.0.2001))
+      '@playwright/test':
+        specifier: ^1.62.1
+        version: 1.62.1
       '@rsbuild/core':
         specifier: ^2.1.6
         version: 2.1.13
@@ -652,6 +655,11 @@ packages:
 
   '@pinojs/redact@0.4.0':
     resolution: {integrity: sha512-k2ENnmBugE/rzQfEcdWHcCY+/FM3VLzH9cYEsbdsoqrvzAKRhUZeRNhAZvB8OitQJ1TBed3yqWtdjzS6wJKBwg==}
+
+  '@playwright/test@1.62.1':
+    resolution: {integrity: sha512-DTcUc8qii+cpHvtOwggMtBRMjKZHXYWdw8syRYu2vtzuq4Wxphqq4NfCs5Zt44L6mA8rfDfj+PHnxFc/FeK6mQ==}
+    engines: {node: '>=20'}
+    hasBin: true
 
   '@pnpm/config.env-replace@1.1.0':
     resolution: {integrity: sha512-htyl8TWnKL7K/ESFa1oW2UB5lVDxuF5DpM7tBi6Hu2LNL3mWkIzNLG6N4zoCUP1lCKNxWy/3iu8mS8MvToGd6w==}
@@ -1600,6 +1608,11 @@ packages:
     resolution: {integrity: sha512-EQsFzMUJkCKGr1ePqlYADkIUmHW1s3ZXr5Yqy6wbGrfUCphpl2maM/kyOIRA2HpP3AaFQTZXD4ldjek+nccddA==}
     engines: {node: '>=14.14'}
 
+  fsevents@2.3.2:
+    resolution: {integrity: sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==}
+    engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
+    os: [darwin]
+
   fx-runner@1.6.0:
     resolution: {integrity: sha512-PEEUfnQJw0/io6SspBbR4EIeXFL/qe/sugesCyfr9M3llgyxNaOH8stvO6KJOKRjeUAvEB6oSZKS3lgjSEOsXg==}
     hasBin: true
@@ -2164,6 +2177,16 @@ packages:
 
   pkg-types@2.3.1:
     resolution: {integrity: sha512-y+ichcgc2LrADuhLNAx8DFjVfgz91pRxfZdI3UDhxHvcVEZsenLO+7XaU5vOp0u/7V/wZ+plyuQxtrDlZJ+yeg==}
+
+  playwright-core@1.62.1:
+    resolution: {integrity: sha512-wPYSwEBJY9GHraISXqyqtx0na0LpO3XEX7jNDhntbex7tzUS7kLnZsOlFruFJB4Hi/rhDMjXGqHewDZ68nYZVw==}
+    engines: {node: '>=20'}
+    hasBin: true
+
+  playwright@1.62.1:
+    resolution: {integrity: sha512-0M+L3LAD8/nm554LOla9Ayx0j0tmFZ0FBcoQ7F1VuVHpM/XpiC8RcDzBQB8W5+hA8L22THxELzeF+2WcUzvcLg==}
+    engines: {node: '>=20'}
+    hasBin: true
 
   postcss@8.5.26:
     resolution: {integrity: sha512-u82N74LFzG8ca+dD8puPnplTXoGH4fTPpVGuIbt36G3qvNlkvfD0lEAZSxaly3KX8TS/L1A1gsCEmvKmBcVbkQ==}
@@ -3127,6 +3150,10 @@ snapshots:
 
   '@pinojs/redact@0.4.0': {}
 
+  '@playwright/test@1.62.1':
+    dependencies:
+      playwright: 1.62.1
+
   '@pnpm/config.env-replace@1.1.0': {}
 
   '@pnpm/network.ca-file@1.0.2':
@@ -3998,6 +4025,9 @@ snapshots:
       jsonfile: 6.2.1
       universalify: 2.0.1
 
+  fsevents@2.3.2:
+    optional: true
+
   fx-runner@1.6.0:
     dependencies:
       commander: 12.1.0
@@ -4522,6 +4552,14 @@ snapshots:
       confbox: 0.2.4
       exsolve: 1.1.1
       pathe: 2.0.3
+
+  playwright-core@1.62.1: {}
+
+  playwright@1.62.1:
+    dependencies:
+      playwright-core: 1.62.1
+    optionalDependencies:
+      fsevents: 2.3.2
 
   postcss@8.5.26:
     dependencies:

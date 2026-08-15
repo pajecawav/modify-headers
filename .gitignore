@@ -6,3 +6,7 @@ coverage
 
 dist.crx
 dist.pem
+
+test-results
+playwright-report
+playwright/.cache

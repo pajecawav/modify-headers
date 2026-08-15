@@ -14,6 +14,7 @@
 		"lint:tsc": "tsc -b --noEmit",
 		"lint:format": "pt format",
 		"format": "pt format --write",
+		"test": "playwright test",
 		"prepare": "pt prepare"
 	},
 	"dependencies": {
@@ -24,6 +25,7 @@
 	},
 	"devDependencies": {
 		"@pajecawav/tools": "^0.0.7",
+		"@playwright/test": "^1.62.1",
 		"@rsbuild/core": "^2.1.6",
 		"@rsbuild/plugin-babel": "^2.0.1",
 		"@rsbuild/plugin-solid": "^1.2.2",
