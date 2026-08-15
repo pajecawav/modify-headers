@@ -4,13 +4,36 @@
 	"description": "modify headers",
 	"version": "0.0.0",
 	"manifest_version": 3,
-	"permissions": ["declarativeNetRequest", "storage"],
+	"permissions": ["declarativeNetRequest", "storage", "offscreen"],
 	"host_permissions": ["<all_urls>"],
 	"background": {
 		"service_worker": "background.js",
 		"type": "module"
 	},
-	"action": {},
+	"action": {
+		"theme_icons": [
+			{
+				"light": "assets/logo16.png",
+				"dark": "assets/logo-white16.png",
+				"size": 16
+			},
+			{
+				"light": "assets/logo32.png",
+				"dark": "assets/logo-white32.png",
+				"size": 32
+			},
+			{
+				"light": "assets/logo48.png",
+				"dark": "assets/logo-white48.png",
+				"size": 48
+			},
+			{
+				"light": "assets/logo128.png",
+				"dark": "assets/logo-white128.png",
+				"size": 128
+			}
+		]
+	},
 	"options_page": "options.html",
 	"icons": {
 		"16": "assets/logo16.png",

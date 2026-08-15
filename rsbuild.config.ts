@@ -18,6 +18,7 @@ export default defineConfig({
 				import: "./src/background",
 				html: false,
 			},
+			offscreen: "./src/offscreen/index.ts",
 			options: "./src/options/index.tsx",
 		},
 	},

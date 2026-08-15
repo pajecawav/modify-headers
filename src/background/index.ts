@@ -1,7 +1,8 @@
 import { createHandler, type InferNamespace } from "werpc";
-import { createLogger } from "./lib/logger";
-import { backgroundRouter } from "./lib/router";
-import { store } from "./lib/store";
+import { createLogger } from "../lib/logger";
+import { backgroundRouter } from "../lib/router";
+import { store } from "../lib/store";
+import { initTheme } from "./theme";
 
 const logger = createLogger("background");
 
@@ -18,6 +19,7 @@ declare module "werpc" {
 chrome.runtime.onInstalled.addListener(async details => {
 	logger.log("installed", details.reason);
 	await store.load();
+	initTheme();
 });
 
 chrome.action.onClicked.addListener(() => {
@@ -26,7 +28,8 @@ chrome.action.onClicked.addListener(() => {
 
 void (async () => {
 	const state = await store.load();
-	const { applyDnr } = await import("./lib/dnr");
+	const { applyDnr } = await import("../lib/dnr");
 	await applyDnr(state);
 	logger.log("hydrated", state.groups.length, "groups");
+	initTheme();
 })();
