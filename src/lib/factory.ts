@@ -1,5 +1,19 @@
 import { nanoid } from "nanoid";
-import { resourceTypeSchema, type HeaderGroup, HeaderRule } from "./types";
+import z from "zod";
+import { HeaderRule, resourceTypeSchema, type HeaderGroup } from "./types";
+
+const DEFAULT_RESOURCE_TYPES: Array<z.infer<typeof resourceTypeSchema>> = [
+	"main_frame",
+	"sub_frame",
+	"stylesheet",
+	"script",
+	"image",
+	"font",
+	"object",
+	"xmlhttprequest",
+	"ping",
+	"media",
+];
 
 export const createRule = (): HeaderRule => ({
 	id: nanoid(),
@@ -7,7 +21,7 @@ export const createRule = (): HeaderRule => ({
 	operation: "set",
 	value: "",
 	headerType: "request",
-	condition: { resourceTypes: resourceTypeSchema.options },
+	condition: { resourceTypes: DEFAULT_RESOURCE_TYPES },
 	enabled: true,
 });
 
