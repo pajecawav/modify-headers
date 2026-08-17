@@ -5,7 +5,9 @@
 	"type": "module",
 	"scripts": {
 		"dev": "cross-env FORCE_COLOR=1 run-p -l watch start:chromium",
-		"build": "rsbuild build",
+		"build": "cross-env FORCE_COLOR=1 run-s -l build:rsbuild build:webext",
+		"build:rsbuild": "rsbuild build",
+		"build:webext": "web-ext build --source-dir dist --overwrite-dest",
 		"watch": "rsbuild build --watch",
 		"start:chromium": "web-ext run -s dist -t chromium --start-url=example.com",
 		"start:firefox": "web-ext run -s dist -t firefox-desktop --start-url=example.com",
