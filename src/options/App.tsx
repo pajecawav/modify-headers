@@ -39,7 +39,9 @@ export const App = (): JSX.Element => {
 	const handleGroupChange = (group: HeaderGroup): void => {
 		setGroups(gs => {
 			const idx = gs.findIndex(g => g.id === group.id);
-			if (idx === -1) return [...gs, group];
+			if (idx === -1) {
+				return [...gs, group];
+			}
 			const next = [...gs];
 			next[idx] = group;
 			return next;

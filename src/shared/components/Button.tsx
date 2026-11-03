@@ -127,7 +127,9 @@ export const Button = (props: ButtonProps) => {
 	const size = () => local.size ?? "md";
 
 	const padding = () => {
-		if (variant() === "link") return "p-0";
+		if (variant() === "link") {
+			return "p-0";
+		}
 		return local.icon ? iconSizeClasses[size()] : sizeClasses[size()];
 	};
 

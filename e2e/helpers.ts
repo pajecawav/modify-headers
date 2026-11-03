@@ -57,7 +57,9 @@ export async function waitForDnrRuleCount(
 	const deadline = Date.now() + timeoutMs;
 	while (Date.now() < deadline) {
 		const rules = await getDnrRules(worker);
-		if (rules.length === expected) return;
+		if (rules.length === expected) {
+			return;
+		}
 		await new Promise(r => setTimeout(r, 100));
 	}
 	const rules = await getDnrRules(worker);
@@ -74,7 +76,9 @@ export async function waitForStorage<T>(
 	const deadline = Date.now() + timeoutMs;
 	while (Date.now() < deadline) {
 		const state = await getStorage<T>(worker);
-		if (predicate(state)) return state;
+		if (predicate(state)) {
+			return state;
+		}
 		await new Promise(r => setTimeout(r, 100));
 	}
 	const state = await getStorage<T>(worker);

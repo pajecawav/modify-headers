@@ -64,7 +64,9 @@ export const GroupCard = (props: Props): JSX.Element => {
 					appearance="negative"
 					size="sm"
 					onClick={() => {
-						if (confirm(`Delete group "${props.group.name}"?`)) props.onDelete();
+						if (confirm(`Delete group "${props.group.name}"?`)) {
+							props.onDelete();
+						}
 					}}
 				>
 					Delete

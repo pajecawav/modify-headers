@@ -20,29 +20,29 @@
 		"prepare": "pt prepare"
 	},
 	"dependencies": {
-		"nanoid": "^6.0.1",
-		"solid-js": "^1.9.14",
-		"werpc": "^0.0.5",
-		"zod": "^4.4.3"
+		"nanoid": "^6.0.2",
+		"solid-js": "^1.9.18",
+		"werpc": "^0.1.0",
+		"zod": "^4.6.7"
 	},
 	"devDependencies": {
-		"@pajecawav/tools": "^0.0.7",
-		"@playwright/test": "^1.62.1",
-		"@rsbuild/core": "^2.1.6",
-		"@rsbuild/plugin-babel": "^2.0.1",
+		"@pajecawav/tools": "^0.1.0",
+		"@playwright/test": "^1.64.1",
+		"@rsbuild/core": "^2.3.0",
+		"@rsbuild/plugin-babel": "^2.1.0",
 		"@rsbuild/plugin-solid": "^1.2.2",
 		"@tailwindcss/postcss": "^4.3.3",
-		"@types/node": "^24.13.3",
-		"chrome-types": "^0.1.435",
+		"@types/node": "^26.6.6",
+		"chrome-types": "^0.1.461",
 		"cross-env": "^10.1.0",
 		"husky": "^9.1.7",
-		"npm-run-all2": "^9.0.3",
-		"oxfmt": "^0.63.0",
-		"oxlint": "^1.78.0",
-		"oxlint-tsgolint": "^7.0.2001",
+		"npm-run-all2": "^9.0.4",
+		"oxfmt": "^0.75.0",
+		"oxlint": "^1.90.0",
+		"oxlint-tsgolint": "^7.0.2005",
 		"tailwindcss": "^4.3.3",
 		"typescript": "~7.0.2",
-		"web-ext": "^10.5.0"
+		"web-ext": "^10.8.0"
 	},
-	"packageManager": "pnpm@11.20.0"
+	"packageManager": "pnpm@12.16.1"
 }

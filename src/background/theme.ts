@@ -19,14 +19,18 @@ export const setIcon = (dark: boolean) => {
 let creating: Promise<void> | null = null;
 
 const setupOffscreenDocument = async () => {
-	if (!("offscreen" in chrome)) return;
+	if (!("offscreen" in chrome)) {
+		return;
+	}
 
 	const offscreenUrl = chrome.runtime.getURL("offscreen.html");
 	const existingContexts = await chrome.runtime.getContexts({
 		contextTypes: ["OFFSCREEN_DOCUMENT"],
 		documentUrls: [offscreenUrl],
 	});
-	if (existingContexts.length > 0) return;
+	if (existingContexts.length > 0) {
+		return;
+	}
 
 	if (creating) {
 		await creating;

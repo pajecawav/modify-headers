@@ -52,7 +52,9 @@ export class EchoServer {
 	}
 
 	public async stop(): Promise<void> {
-		if (!this.server) return;
+		if (!this.server) {
+			return;
+		}
 		for (const socket of this.sockets) {
 			socket.destroy();
 		}
